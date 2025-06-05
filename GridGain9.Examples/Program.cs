@@ -3,7 +3,7 @@ using Apache.Ignite.Compute;
 using Apache.Ignite.Table;
 using GridGain9.ComputeTester;
 using GridGain9.ComputeTester.Jobs;
-Console.WriteLine(">>> Starting .NET Compute Examples");
+Console.WriteLine(">>> Starting .NET examples");
 
 await ManagementApi.ActivateCluster("/home/pavel/Downloads/gridgain-license.json");
 Console.WriteLine("Cluster activated");
@@ -65,15 +65,15 @@ static async Task RunStreamerWithReceiver(IIgniteClient client, DeploymentUnit u
     Console.WriteLine($"\nReceiver descriptor created: {receiverDesc}");
 
     // Stream data.
-    int[] ids = [1, 2, 3, 4, 5];
-    IAsyncEnumerable<int> data = ids.ToAsyncEnumerable();
+    IAsyncEnumerable<int> data = Enumerable.Range(1, 10).ToAsyncEnumerable();
 
     IAsyncEnumerable<IIgniteTuple> streamerResults = tableView.StreamDataAsync(
         data: data,
         receiver: receiverDesc,
         keySelector: id => new IgniteTuple { ["ID"] = id },
         payloadSelector: id => id,
-        receiverArg: table.Name);
+        receiverArg: table.Name,
+        options: new DataStreamerOptions { PageSize = 100 });
 
     Console.WriteLine($"\nResults from receiver:");
     await foreach (var item in streamerResults)
