@@ -11,6 +11,9 @@ Console.WriteLine("Cluster activated");
 var client = await IgniteClient.StartAsync(new("localhost:10800"));
 Console.WriteLine($"\nClient connected: {client}");
 
+// Deploy the GridGain9.Examples.Jobs assembly to the cluster.
+// It will be undeployed automatically on exit.
+// => we can modify the jobs and simply re-run the program to test the changes.
 await using var deploymentUnit = await ManagementApi.DeployAssembly(typeof(HelloJob).Assembly);
 Console.WriteLine($"\nJobs assembly deployed to the cluster: {deploymentUnit}");
 
