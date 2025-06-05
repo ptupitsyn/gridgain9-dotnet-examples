@@ -3,9 +3,10 @@ using Apache.Ignite.Compute;
 using Apache.Ignite.Table;
 using GridGain9.ComputeTester;
 using GridGain9.ComputeTester.Jobs;
+Console.WriteLine(">>> Starting .NET Compute Examples");
 
-// Uncomment to activate the cluster, then comment again.
-// await ManagementApi.ActivateCluster("/home/pavel/Downloads/gridgain-license.json");
+await ManagementApi.ActivateCluster("/home/pavel/Downloads/gridgain-license.json");
+Console.WriteLine("Cluster activated");
 
 var client = await IgniteClient.StartAsync(new("localhost:10800"));
 Console.WriteLine($"\nClient connected: {client}");
