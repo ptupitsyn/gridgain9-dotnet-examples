@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Reflection;
+using Apache.Ignite;
 using Apache.Ignite.Compute;
 
 namespace GridGain9.ComputeTester;
@@ -28,6 +29,21 @@ public static class ManagementApi
             JsonContent.Create(request));
 
         await EnsureSuccess(response);
+
+        // Wait for the cluster to become active.
+        for (int retry = 0; retry < 50; retry++)
+        {
+            try
+            {
+                using var igniteClient = await IgniteClient.StartAsync(new("localhost"));
+
+                return;
+            }
+            catch (Exception)
+            {
+                await Task.Delay(300);
+            }
+        }
     }
 
     public static async Task<DisposableDeploymentUnit> DeployUnit(string unitId, string unitVersion, IList<string> unitContent)

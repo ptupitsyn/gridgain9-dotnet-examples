@@ -5,7 +5,10 @@ using GridGain9.ComputeTester;
 using GridGain9.ComputeTester.Jobs;
 Console.WriteLine(">>> Starting .NET examples");
 
-await ManagementApi.ActivateCluster("/home/pavel/Downloads/gridgain-license.json");
+// TODO: Set the path to your GridGain license file.
+var licenseFilePath = "/Users/ptupitsyn/Downloads/gridgain-license.json";
+
+await ManagementApi.ActivateCluster(licenseFilePath);
 Console.WriteLine("Cluster activated");
 
 var client = await IgniteClient.StartAsync(new("localhost:10800"));
