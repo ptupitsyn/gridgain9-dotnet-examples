@@ -1,6 +1,6 @@
 # GridGain 9 .NET Client Examples 
 
-# Start a GridGain node in Docker
+# Start a GridGain Node in Docker
 
 Expose ports - 10300 for REST, 10800 for client:
 
@@ -15,7 +15,7 @@ docker run -p 10300:10300 -p 10800:10800 gridgain/gridgain9:9.1.2
 
 Alternatively, use the [CLI tool](https://www.gridgain.com/docs/gridgain9/latest/ignite-cli-tool).
 
-# Run the API tester
+# Run the Examples
 
 ```bash
 dotnet run GridGain9.Examples
