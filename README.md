@@ -18,5 +18,5 @@ Alternatively, use the [CLI tool](https://www.gridgain.com/docs/gridgain9/latest
 # Run the API tester
 
 ```bash
-dotnet run GridGain9.Examples.ApiTester
+dotnet run GridGain9.Examples
 ```
